@@ -446,8 +446,10 @@ end
 Findmax, get the class with highest confidence and class number out.
 """
 function findmax!(input::Array{T}, idst::Int, idend::Int) where {T}
+    inputview = view(input, idst:idend, :)
     for i in 1:size(input, 2)
-        input[end-2, i], input[end-1, i] = findmax(input[idst:idend, i])
+        iszero(input[5,i]) && continue #They're going to be thrown away, so don't bother
+        input[end-2, i], input[end-1, i] = findmax(inputview[:,i])
     end
 end
 function findmax!(input::CuArray, idst::Int, idend::Int)
@@ -456,6 +458,7 @@ function findmax!(input::CuArray, idst::Int, idend::Int)
 end
 function kern_findmax!(input::CuDeviceMatrix{T}, idst::Integer, idend::Integer) where {T}
     if threadIdx().x == idend
+        iszero(input[5, j]) && return #They're going to be thrown away, so don't bother
         j = blockIdx().x
         val = zero(T)
         idx = zero(T)
