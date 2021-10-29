@@ -30,3 +30,8 @@ function v3_tiny_COCO(;batch=1, silent=false, w=416, h=416, cfgchanges=[(:net, 1
     yolo(joinpath(models_dir,"yolov3-tiny.cfg"), joinpath(artifact"yolov3-tiny-COCO", "yolov3-tiny-COCO.weights"), batch, silent=silent, cfgchanges=cfgchanges)
 end
 v3_tiny_416_COCO(;batch=1, silent=false, cfgchanges=nothing) = v3_tiny_COCO(w=416, h=416, batch=batch, silent=silent, cfgchanges=cfgchanges)
+
+## YOLOV4-nonStandard
+function v4_608_COCO(;batch=1, silent=true, w=608, h=608, cfgchanges=[(:net, 1, :width, w), (:net, 1, :height, h)]) 
+    yolo(joinpath(models_dir,"yolov4.cfg"), joinpath(pwd(),"/weights/yolov4.weights"), batch, silent=silent, cfgchanges=cfgchanges)
+end
