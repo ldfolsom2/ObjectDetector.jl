@@ -12,6 +12,7 @@ using Pkg.Artifacts
 using ImageFiltering
 using ImageTransformations
 using ImageCore
+using CuArrays
 
 using BenchmarkTools
 using PrettyTables
