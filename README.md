@@ -1,6 +1,6 @@
 # ObjectDetector.jl
 
-Object detection via YOLO in Julia. Updated to support YOLOv4 with the provided non-standard configuration file. YOLOv4 requires downloading of pretrained weights. YOLO models are loaded directly from Darknet .cfg and .weights files as Flux models. Uses CUDA, if available.
+Object detection via YOLO in Julia. Updated to support YOLOv4 with the provided non-standard configuration file. YOLOv4 requires downloading of pretrained weights and storing them in ObjectDetector.jl/src/yolo/weights. YOLO models are loaded directly from Darknet .cfg and .weights files as Flux models. Uses CUDA, if available.
 
 ## Installation
 
@@ -18,7 +18,7 @@ pkg> add ObjectDetector
 ```julia
 using ObjectDetector, FileIO
 
-yolomod = YOLO.v3_608_COCO(batch=1, silent=true) # Load the YOLOv3-tiny model pretrained on COCO, with a batch size of 1
+yolomod = YOLO.v4_608_COCO(batch=1, silent=true) # Load the YOLOv4 model pretrained on COCO, with a batch size of 1
 
 batch = emptybatch(yolomod) # Create a batch object. Automatically uses the GPU if available
 
